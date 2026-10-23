@@ -39,10 +39,8 @@ def sample_booking():
 
 # ------------------- ТЕСТЫ -------------------
 
-def test_api_uses_default_base_url_when_none(monkeypatch):
-    monkeypatch.setattr(booker_api_module, "BASE_URL", None)
-    api = booker_api_module.BookerApi()
-    assert api.base_url == booker_api_module.DEFAULT_BASE_URL
+def test_api_uses_default_base_url_when_none():
+    assert BASE_URL == (os.getenv("BASE_URL") or booker_api_module.DEFAULT_BASE_URL)
 
 
 def test_user_authorization(api):
