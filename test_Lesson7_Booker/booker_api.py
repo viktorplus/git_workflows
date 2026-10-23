@@ -11,7 +11,7 @@ class BookerApi:
     """Класс для взаимодействия с API Restful-Booker"""
 
     def __init__(self, base_url=None):
-        self.base_url = base_url or BASE_URL
+        self.base_url = BASE_URL if base_url is None else base_url
 
     def get_auth_token(self, username="admin", password="password123"):
         """Получение токена авторизации"""
