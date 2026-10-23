@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      BASE_URL: ${{ vars.BASE_URL }}
+      BASE_URL: ${{ secrets.BASE_URL }}
 
     steps:
       - name: Checkout repository
