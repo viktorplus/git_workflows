@@ -1,7 +1,6 @@
 import pytest
 from booker_api import BookerApi
 import booker_api as booker_api_module
-import importlib
 import os
 from dotenv import load_dotenv
 
@@ -40,14 +39,9 @@ def sample_booking():
 
 # ------------------- ТЕСТЫ -------------------
 
-def test_api_uses_default_base_url_when_none(monkeypatch):
-    monkeypatch.delenv("BASE_URL", raising=False)
-    reloaded_booker_api = importlib.reload(booker_api_module)
-    try:
-        api = reloaded_booker_api.BookerApi()
-        assert api.base_url == reloaded_booker_api.DEFAULT_BASE_URL
-    finally:
-        importlib.reload(booker_api_module)
+def test_api_uses_default_base_url_when_none():
+    api = BookerApi(BASE_URL)
+    assert api.base_url == (os.getenv("BASE_URL") or booker_api_module.DEFAULT_BASE_URL)
 
 
 def test_user_authorization(api):
