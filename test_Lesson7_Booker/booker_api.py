@@ -8,6 +8,7 @@ BASE_URL = os.getenv("BASE_URL")
 
 class BookerApi:
     """Класс для взаимодействия с API Restful-Booker"""
+    #
 
     def __init__(self, base_url=BASE_URL):
         self.base_url = base_url
