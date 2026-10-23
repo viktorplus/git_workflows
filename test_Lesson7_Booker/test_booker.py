@@ -42,7 +42,7 @@ def sample_booking():
 def test_api_uses_default_base_url_when_none(monkeypatch):
     monkeypatch.setattr(booker_api_module, "BASE_URL", None)
     api = booker_api_module.BookerApi()
-    assert api.base_url == "https://restful-booker.herokuapp.com"
+    assert api.base_url == booker_api_module.DEFAULT_BASE_URL
 
 
 def test_user_authorization(api):
@@ -189,4 +189,3 @@ def test_get_nonexistent_booking(api):
         print(keys)
         for key in keys_std:
             assert key in keys, f"Ключ {key} отсутствует в ответе API"
-
