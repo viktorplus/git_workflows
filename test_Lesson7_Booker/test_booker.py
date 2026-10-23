@@ -1,11 +1,12 @@
 import pytest
 from booker_api import BookerApi
+import booker_api as booker_api_module
 import os
 from dotenv import load_dotenv
 
 load_dotenv()
 
-BASE_URL = os.getenv("BASE_URL")
+BASE_URL = os.getenv("BASE_URL") or "https://restful-booker.herokuapp.com"
 # BASE_URL = "https://restful-booker.herokuapp.com"
 
 
@@ -37,6 +38,11 @@ def sample_booking():
 
 
 # ------------------- ТЕСТЫ -------------------
+
+def test_api_uses_default_base_url_when_none():
+    api = BookerApi(BASE_URL)
+    assert api.base_url == (os.getenv("BASE_URL") or booker_api_module.DEFAULT_BASE_URL)
+
 
 def test_user_authorization(api):
     """Тест: получение токена авторизации"""
@@ -182,9 +188,3 @@ def test_get_nonexistent_booking(api):
         print(keys)
         for key in keys_std:
             assert key in keys, f"Ключ {key} отсутствует в ответе API"
-
-
-
-
-
-
