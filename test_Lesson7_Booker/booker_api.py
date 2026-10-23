@@ -4,13 +4,14 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-BASE_URL = os.getenv("BASE_URL")
+DEFAULT_BASE_URL = "https://restful-booker.herokuapp.com"
+BASE_URL = os.getenv("BASE_URL", DEFAULT_BASE_URL)
 
 class BookerApi:
     """Класс для взаимодействия с API Restful-Booker"""
 
     def __init__(self, base_url=BASE_URL):
-        self.base_url = base_url
+        self.base_url = base_url or DEFAULT_BASE_URL
 
     def get_auth_token(self, username="admin", password="password123"):
         """Получение токена авторизации"""
@@ -65,4 +66,3 @@ class BookerApi:
         }
         resp = requests.delete(f"{self.base_url}/booking/{booking_id}", headers=headers)
         return resp
-

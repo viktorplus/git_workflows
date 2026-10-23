@@ -38,6 +38,11 @@ def sample_booking():
 
 # ------------------- ТЕСТЫ -------------------
 
+def test_api_uses_default_base_url_when_none():
+    api = BookerApi(None)
+    assert api.base_url == "https://restful-booker.herokuapp.com"
+
+
 def test_user_authorization(api):
     """Тест: получение токена авторизации"""
     token = api.get_auth_token("admin", "password123")
@@ -182,7 +187,6 @@ def test_get_nonexistent_booking(api):
         print(keys)
         for key in keys_std:
             assert key in keys, f"Ключ {key} отсутствует в ответе API"
-
 
 
 
