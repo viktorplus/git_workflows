@@ -1,7 +1,6 @@
 import pytest
 from booker_api import BookerApi
 import booker_api as booker_api_module
-import importlib
 import os
 from dotenv import load_dotenv
 
@@ -41,9 +40,8 @@ def sample_booking():
 # ------------------- ТЕСТЫ -------------------
 
 def test_api_uses_default_base_url_when_none(monkeypatch):
-    monkeypatch.delenv("BASE_URL", raising=False)
-    reloaded_booker_api = importlib.reload(booker_api_module)
-    api = reloaded_booker_api.BookerApi()
+    monkeypatch.setattr(booker_api_module, "BASE_URL", "https://restful-booker.herokuapp.com")
+    api = booker_api_module.BookerApi()
     assert api.base_url == "https://restful-booker.herokuapp.com"
 
 
@@ -191,6 +189,5 @@ def test_get_nonexistent_booking(api):
         print(keys)
         for key in keys_std:
             assert key in keys, f"Ключ {key} отсутствует в ответе API"
-
 
 
